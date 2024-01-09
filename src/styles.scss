@@ -1,1 +1,99 @@
-/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+$md-tsprimarypalette: (
+  50: #e4e5e7,
+  100: #bcbec3,
+  200: #8f929b,
+  300: #626673,
+  400: #414655,
+  500: #1f2537,
+  600: #1b2131,
+  700: #171b2a,
+  800: #121623,
+  900: #0a0d16,
+  A100: #5882ff,
+  A200: #255cff,
+  A400: #003cf1,
+  A700: #0036d8,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff,
+  ),
+);
+
+$md-tsaccentpalette: (
+  50: #feeee3,
+  100: #fdd5b9,
+  200: #fcb98b,
+  300: #fb9d5d,
+  400: #fa883a,
+  500: #f97317,
+  600: #f86b14,
+  700: #f76011,
+  800: #f6560d,
+  900: #f54307,
+  A100: #ffffff,
+  A200: #ffeeea,
+  A400: #ffc5b7,
+  A700: #ffb19d,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$termsheet-challenge-primary: mat.define-palette($md-tsprimarypalette);
+$termsheet-challenge-accent: mat.define-palette(
+  $md-tsaccentpalette,
+  A200,
+  A100,
+  A400
+);
+$termsheet-challenge-warn: mat.define-palette(mat.$red-palette);
+
+$termsheet-challenge-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $termsheet-challenge-primary,
+      accent: $termsheet-challenge-accent,
+      warn: $termsheet-challenge-warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($termsheet-challenge-theme);
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

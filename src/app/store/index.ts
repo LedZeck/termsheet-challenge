@@ -8,6 +8,7 @@ import {
 } from '@ngrx/store';
 
 import * as fromEstateDealsReducers from './estate-deals.reducers';
+import * as fromEstateDealsEffects from './estate-deals.effects';
 
 export interface State {
   estateDeals: fromEstateDealsReducers.EstateDealState;

@@ -1,0 +1,23 @@
+:host {
+  .search-bar {
+    background-color: var(--ts-white);
+    height: 90px;
+    display: flex;
+    align-items: center;
+    padding: var(--xs-spacing) var(--sm-spacing);
+    border-top-left-radius: var(--xs-spacing);
+    border-top-right-radius: var(--xs-spacing);
+    justify-content: space-between;
+    border-bottom: 1px solid var(--ts-medium-grey);
+    mask-clip: padding-box;
+
+    .search-field {
+      margin-top: var(--sm-spacing);
+    }
+    .add-estate-deal-button {
+      background-color: var(--ts-orange);
+      color: var(--ts-white);
+      height: var(--xxlg-spacing);
+    }
+  }
+}

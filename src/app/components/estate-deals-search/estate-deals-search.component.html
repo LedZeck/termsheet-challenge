@@ -1,0 +1,17 @@
+<div class="search-bar">
+  <div class="label">Estate Deals</div>
+  <div class="search-field">
+    <ts-estate-deals-search-form
+      (searchFormObject)="test($event)"
+    ></ts-estate-deals-search-form>
+  </div>
+  <div class="add-estate-deal">
+    <button
+      class="add-estate-deal-button"
+      mat-flat-button
+      (click)="openAddEstateDealDialog()"
+    >
+      Add Estate Deal
+    </button>
+  </div>
+</div>

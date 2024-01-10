@@ -17,7 +17,6 @@ export class AppComponent implements OnInit {
   title = 'termsheet-challenge';
   constructor(private store: Store) {}
   ngOnInit() {
-    console.log('ngOnInit');
     this.store.dispatch(fromActions.loadEstateDeals());
   }
 }

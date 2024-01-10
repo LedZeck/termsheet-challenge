@@ -4,11 +4,17 @@ import * as fromSelectors from '../../store/estate-deals.selectors';
 import { CommonModule } from '@angular/common';
 import { State } from '../../store/';
 import { EstateDealsService } from '../../shared/services/estate-deals.service';
+import { EstateDealsSearchComponent } from '../../components/estate-deals-search/estate-deals-search.component';
+import { EstateDealsTableComponent } from '../../components/estate-deals-table/estate-deals-table.component';
 
 @Component({
-  selector: 'app-estate-deals',
+  selector: 'estate-deals',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    EstateDealsSearchComponent,
+    EstateDealsTableComponent,
+  ],
   templateUrl: './estate-deals.component.html',
   styleUrl: './estate-deals.component.scss',
 })
@@ -21,10 +27,10 @@ export class EstateDealsComponent {
     private estateDealsService: EstateDealsService
   ) {
     this.estateDeals$.subscribe((data) => {
-      console.log(data);
+      // console.log(data);
     });
     this.estateDealsService.getEstateDeals().subscribe((data) => {
-      console.log(data);
+      // console.log(data);
     });
   }
 }

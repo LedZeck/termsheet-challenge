@@ -1,0 +1,25 @@
+:host {
+  .estate-deal-form {
+    padding: var(--md-spacing);
+    .form-row {
+      display: flex;
+      justify-content: space-evenly;
+      mat-form-field {
+        width: 50%;
+        margin: var(--xs-spacing);
+      }
+    }
+    & :last-child {
+      mat-form-field {
+        width: 100%;
+      }
+    }
+    .action-buttons {
+      display: flex;
+      justify-content: flex-end;
+      button {
+        margin: var(--xs-spacing);
+      }
+    }
+  }
+}

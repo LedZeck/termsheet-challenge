@@ -1,1 +1,8 @@
-<p class="ts-big-headline">{{ estateDeals$ | async | json }}</p>
+<section class="estate-deals">
+  <div class="search-bar-wrapper">
+    <ts-estate-deals-search></ts-estate-deals-search>
+  </div>
+  <div class="deals-list-wrapper">
+    <ts-estate-deals-table></ts-estate-deals-table>
+  </div>
+</section>

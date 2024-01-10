@@ -1,0 +1,11 @@
+:host {
+  .search-form {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0 auto;
+    mat-form-field {
+      margin: 8px;
+    }
+  }
+}

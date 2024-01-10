@@ -1,6 +1,10 @@
 @import "./typography.scss";
+@import "./global-variables.scss";
 
 :root {
   --ts-grey: #1f2537;
   --ts-orange: #f97317;
+  --ts-light-grey: #f3f5f6;
+  --ts-medium-grey: #e5e5e5;
+  --ts-white: #fff;
 }

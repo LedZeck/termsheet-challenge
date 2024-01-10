@@ -71,12 +71,7 @@ $md-tsaccentpalette: (
 );
 
 $termsheet-challenge-primary: mat.define-palette($md-tsprimarypalette);
-$termsheet-challenge-accent: mat.define-palette(
-  $md-tsaccentpalette,
-  A200,
-  A100,
-  A400
-);
+$termsheet-challenge-accent: mat.define-palette($md-tsaccentpalette);
 $termsheet-challenge-warn: mat.define-palette(mat.$red-palette);
 
 $termsheet-challenge-theme: mat.define-light-theme(
@@ -99,4 +94,5 @@ body {
   margin: 0;
   padding: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: var(--ts-light-grey);
 }

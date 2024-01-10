@@ -1,0 +1,16 @@
+// Spacing Values
+$xs-spacing: 8px;
+$sm-spacing: calc(#{$xs-spacing} * 2);
+$md-spacing: calc(#{$xs-spacing} * 3);
+$lg-spacing: calc(#{$xs-spacing} * 4);
+$xlg-spacing: calc(#{$xs-spacing} * 5);
+$xxlg-spacing: calc(#{$xs-spacing} * 6);
+
+:root {
+  --xs-spacing: #{$xs-spacing};
+  --sm-spacing: #{$sm-spacing};
+  --md-spacing: #{$md-spacing};
+  --lg-spacing: #{$lg-spacing};
+  --xlg-spacing: #{$xlg-spacing};
+  --xxlg-spacing: #{$xxlg-spacing};
+}

@@ -1,0 +1,16 @@
+<form [formGroup]="searchForm" class="search-form">
+  <mat-form-field appearance="outline">
+    <mat-label>Estate Deal Name</mat-label>
+    <input matInput formControlName="search" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Estate Deal Type</mat-label>
+    <mat-select formControlName="filters" multiple>
+      @for (filter of availableFilters; track filter.type) {
+      <mat-option [value]="filter.type" (click)="onFilterChange(filter.type)">{{
+        filter.type
+      }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</form>

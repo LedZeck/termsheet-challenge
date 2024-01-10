@@ -1,0 +1,112 @@
+// Desktop Text Size Values
+$big-headline: 64px;
+$medium-headline: 48px;
+$small-headline: 32px;
+$smaller-headline: 26px;
+$sub-head: 26px;
+$text-content: 18px;
+
+// Mobile Text Size Values
+$big-headline-mobile: 40px;
+$medium-headline-mobile: 34px;
+$small-headline-mobile: 26px;
+$smaller-headline-mobile: 24px;
+$sub-head-mobile: 24px;
+$text-content-mobile: 16px;
+
+// Font Weight Values
+$weight-subtle: 100;
+$weight-normal: 400;
+$weight-strong: 500;
+$weight-bold: 700;
+
+:root {
+  --big-headline: #{$big-headline};
+  --medium-headline: #{$medium-headline};
+  --small-headline: #{$small-headline};
+  --smaller-headline: #{$smaller-headline};
+  --sub-head: #{$sub-head};
+  --text-content: #{$text-content};
+  --font-weight-subtle: #{$weight-subtle};
+  --font-weight-normal: #{$weight-normal};
+  --font-weight-strong: #{$weight-strong};
+  --font-weight-bold: #{$weight-bold};
+}
+
+@mixin ts-text($font-name, $size, $color) {
+  font-family: $font-name;
+  font-size: $size;
+  color: $color;
+}
+
+.ts-big-headline {
+  @include ts-text("Roboto", var(--big-headline), var(--ts-grey));
+  margin-bottom: 0;
+}
+
+.ts-medium-headline {
+  @include ts-text("Roboto", var(--medium-headline), #fff);
+  margin-bottom: 0;
+}
+
+.ts-small-headline {
+  @include ts-text("Roboto", var(--small-headline), #fff);
+  margin-bottom: 0;
+}
+
+.ts-smaller-headline {
+  @include ts-text("Roboto", var(--smaller-headline), #fff);
+  margin-bottom: 0;
+}
+
+.ts-sub-head {
+  @include ts-text("Roboto", var(--sub-head), #fff);
+  margin-bottom: 0;
+}
+
+.ts-text-content {
+  @include ts-text("Roboto", var(--text-content), #fff);
+  margin-bottom: 0;
+}
+
+.ts-text-content-bold {
+  @include ts-text("Roboto", var(--text-content), #fff);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 0;
+}
+
+.ts-text-content-strong {
+  @include ts-text("Roboto", var(--text-content), #fff);
+  font-weight: var(--font-weight-strong);
+  margin-bottom: 0;
+}
+
+.ts-text-content-normal {
+  @include ts-text("Roboto", var(--text-content), #fff);
+  font-weight: var(--font-weight-normal);
+  margin-bottom: 0;
+}
+
+.ts-text-content-subtle {
+  @include ts-text("Roboto", var(--text-content), #fff);
+  font-weight: var(--font-weight-subtle);
+  margin-bottom: 0;
+}
+
+.ts-text-content-subtle-bold {
+  @include ts-text("Roboto", var(--text-content), #fff);
+  font-weight: var(--font-weight-subtle);
+  margin-bottom: 0;
+}
+
+.ts-text-content-subtle-strong {
+  @include ts-text("Roboto", var(--text-content), #fff);
+  font-weight: var(--font-weight-subtle);
+  margin-bottom: 0;
+}
+
+.ts-text-content-subtle-normal {
+  @include ts-text("Roboto", var(--text-content), #fff);
+  font-weight: var(--font-weight-subtle);
+  margin-bottom: 0;
+}

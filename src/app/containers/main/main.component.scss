@@ -1,0 +1,12 @@
+:host {
+  .nav-logo {
+    color: var(--ts-orange);
+  }
+  .main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+}

@@ -18,4 +18,6 @@ export const reducers: ActionReducerMap<State> = {
   estateDeals: fromEstateDealsReducers.reducer,
 };
 
+export const getEstateDealsState = (state: State) => state.estateDeals;
+
 export const metaReducers: MetaReducer<State>[] = isDevMode() ? [] : [];

@@ -1,5 +1,7 @@
 @use "@angular/material" as mat;
 
+@import "./app/scss/base-ui.scss";
+
 @include mat.core();
 
 $md-tsprimarypalette: (
@@ -95,5 +97,6 @@ body {
 }
 body {
   margin: 0;
+  padding: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }

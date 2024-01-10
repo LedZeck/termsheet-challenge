@@ -4,12 +4,13 @@ import {
   loadEstateDealsSuccess,
   loadEstateDealsFailure,
 } from './estate-deals.actions';
+import { EstateDeal } from '../shared/models/estate-deal.interface';
 
 export interface EstateDealState {
   loading: boolean;
   loaded: boolean;
   error: string;
-  data: any;
+  data: EstateDeal[] | null;
 }
 export const initialState: EstateDealState = {
   loading: false,

@@ -1,0 +1,86 @@
+@mixin estate-deal-card($color) {
+  background-color: var(--ts-grey);
+  margin-top: var(--sm-spacing);
+  box-shadow: 20px 10px 60px #d9d9d9;
+  height: 300px;
+  width: 100%;
+  border-radius: var(--xs-spacing);
+  display: flex;
+  flex-direction: column;
+  border-left: 30px solid $color;
+  .action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      margin: var(--xs-spacing);
+      color: var(--ts-white);
+    }
+  }
+  .top-section {
+    height: 100px;
+    padding: var(--md-spacing);
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid var(--ts-dark-grey);
+    .image-wrapper {
+      height: 100px;
+      width: 100px;
+      img {
+        border-radius: 100%;
+      }
+    }
+    .title-section {
+      width: 100%;
+      height: 100px;
+      margin-left: var(--md-spacing);
+      .title {
+        color: $color;
+        font-size: var(--medium-headline);
+        margin: 0;
+      }
+      .deal-address {
+        color: var(--ts-medium-grey);
+        margin: 0;
+      }
+    }
+  }
+}
+
+@mixin details-content() {
+  .details-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: var(--md-spacing);
+    .details-row {
+      display: flex;
+      justify-content: space-around;
+      .description {
+        color: var(--ts-white);
+        .description-content {
+          color: var(--ts-white);
+          .label {
+            font-weight: var(--font-weight-subtle);
+          }
+        }
+      }
+    }
+    .details {
+    }
+  }
+}
+
+:host {
+  .estate-deals-details-lease {
+    @include estate-deal-card(var(--ts-orange));
+    @include details-content();
+  }
+  .estate-deals-details-aquisition {
+    @include estate-deal-card(var(--ts-green));
+    @include details-content();
+  }
+  .estate-deals-details-development {
+    @include estate-deal-card(var(--ts-blue));
+    @include details-content();
+  }
+}

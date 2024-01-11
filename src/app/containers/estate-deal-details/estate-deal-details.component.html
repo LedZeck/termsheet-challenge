@@ -1,0 +1,60 @@
+<section
+  [ngClass]="{
+    'estate-deals-details-lease': estateDealDetails?.dealType === 'Lease',
+    'estate-deals-details-aquisition':
+      estateDealDetails?.dealType === 'Aquisition',
+      'estate-deals-details-development': estateDealDetails?.dealType === 'Development',
+  }"
+>
+  <div class="top-section">
+    <div class="image-wrapper">
+      <img [src]="estateDealDetails?.image" alt="Estate Deal Image" />
+    </div>
+    <div class="title-section">
+      <h1 class="title">{{ estateDealDetails?.dealName }}</h1>
+      <p class="deal-address">{{ estateDealDetails?.address }}</p>
+    </div>
+    <div class="action-buttons">
+      <button mat-flat-button color="accent" (click)="goBack()">Back</button>
+      <button mat-flat-button color="warn" (click)="editDeal()">Edit</button>
+    </div>
+  </div>
+  <div class="details-content">
+    <div class="details-row">
+      <div class="description">
+        <p class="description-content">
+          Deal Type:
+          <span class="label">
+            {{ estateDealDetails?.dealType }}
+          </span>
+        </p>
+      </div>
+      <div class="description">
+        <p class="description-content">
+          Purchase Price:
+          <span class="label">
+            {{ estateDealDetails?.price | currency }}
+          </span>
+        </p>
+      </div>
+    </div>
+    <div class="details-row">
+      <div class="description">
+        <p class="description-content">
+          NOI:
+          <span class="label">
+            {{ estateDealDetails?.noi | currency }}
+          </span>
+        </p>
+      </div>
+      <div class="description">
+        <p class="description-content">
+          Cap Rate:
+          <span class="label">
+            {{ estateDealDetails?.capRate | percent }}
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -25,12 +25,5 @@ export class EstateDealsComponent {
   constructor(
     private store: Store<State>,
     private estateDealsService: EstateDealsService
-  ) {
-    this.estateDeals$.subscribe((data) => {
-      // console.log(data);
-    });
-    this.estateDealsService.getEstateDeals().subscribe((data) => {
-      // console.log(data);
-    });
-  }
+  ) {}
 }

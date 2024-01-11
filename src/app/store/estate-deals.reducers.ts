@@ -3,6 +3,8 @@ import {
   loadEstateDeals,
   loadEstateDealsSuccess,
   loadEstateDealsFailure,
+  updateEstateDeal,
+  updateEstateDealSuccess,
 } from './estate-deals.actions';
 import { EstateDeal } from '../shared/models/estate-deal.interface';
 
@@ -37,6 +39,17 @@ export const counterReducer = createReducer(
     loading: false,
     loaded: false,
     error,
+  })),
+  on(updateEstateDeal, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+  })),
+  on(updateEstateDealSuccess, (state, { data }) => ({
+    ...state,
+    data: data,
+    loading: false,
+    loaded: true,
   }))
 );
 

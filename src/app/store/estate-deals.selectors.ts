@@ -1,5 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import * as fromReducers from './';
+import { EstateDeal } from '../shared/models/estate-deal.interface';
 
 export const selectEstateDealsState = createSelector(
   fromReducers.getEstateDealsState,
@@ -9,6 +10,6 @@ export const selectEstateDealsState = createSelector(
 export const getEstateDealsData = createSelector(
   selectEstateDealsState,
   (state) => {
-    return state?.data;
+    return state?.data as EstateDeal[];
   }
 );

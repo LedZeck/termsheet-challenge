@@ -1,1 +1,46 @@
-<p>estate-deals-table works!</p>
+<section class="table-container" tabindex="0">
+  <table mat-table [dataSource]="dataSource">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="dealName">
+      <th mat-header-cell *matHeaderCellDef>Deal Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.dealName }}</td>
+    </ng-container>
+
+    <!-- Type Column -->
+    <ng-container matColumnDef="dealType">
+      <th mat-header-cell *matHeaderCellDef>Deal Type</th>
+      <td mat-cell *matCellDef="let element">{{ element.dealType }}</td>
+    </ng-container>
+
+    <!-- Price Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+    </ng-container>
+
+    <!-- Noi Column -->
+    <ng-container matColumnDef="noi">
+      <th mat-header-cell *matHeaderCellDef>Noi</th>
+      <td mat-cell *matCellDef="let element">{{ element.noi }}</td>
+    </ng-container>
+
+    <!-- CapRate Column -->
+    <ng-container matColumnDef="capRate">
+      <th mat-header-cell *matHeaderCellDef>CapRate</th>
+      <td mat-cell *matCellDef="let element">{{ element.capRate }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      (click)="clickRow(row)"
+    ></tr>
+  </table>
+</section>

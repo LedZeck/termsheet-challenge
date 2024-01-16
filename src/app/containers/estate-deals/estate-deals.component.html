@@ -1,10 +1,10 @@
 <section class="estate-deals">
   <div class="search-bar-wrapper">
-    <ts-estate-deals-search></ts-estate-deals-search>
+    <ts-estate-deals-search
+      (searchFormObject)="search($event)"
+    ></ts-estate-deals-search>
   </div>
   <div class="deals-list-wrapper">
-    <ts-estate-deals-table
-      [estateDeals]="estateDeals$ | async"
-    ></ts-estate-deals-table>
+    <ts-estate-deals-table [estateDeals]="estateDeals"></ts-estate-deals-table>
   </div>
 </section>

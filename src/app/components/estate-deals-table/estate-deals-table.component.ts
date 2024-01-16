@@ -1,12 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { EstateDeal } from '../../shared/models/estate-deal.interface';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'ts-estate-deals-table',
   standalone: true,
-  imports: [MatTableModule],
+  imports: [MatTableModule, CommonModule],
   templateUrl: './estate-deals-table.component.html',
   styleUrl: './estate-deals-table.component.scss',
 })

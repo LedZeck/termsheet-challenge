@@ -9,6 +9,8 @@ export enum EstateDealActionTypes {
   UpdateEstateDeal = '[EstateDeal] Update EstateDeal',
   UpdateEstateDealSuccess = '[EstateDeal] Update EstateDeal Success',
   UpdateEstateDealFailure = '[EstateDeal] Update EstateDeal Failure',
+
+  FilterEstateDeals = '[EstateDeal] Filter EstateDeals',
 }
 
 export const loadEstateDeals = createAction(
@@ -38,4 +40,9 @@ export const updateEstateDealSuccess = createAction(
 export const updateEstateDealFailure = createAction(
   EstateDealActionTypes.UpdateEstateDealFailure,
   props<{ error: any }>()
+);
+
+export const filterEstateDeals = createAction(
+  EstateDealActionTypes.FilterEstateDeals,
+  props<{ search: string }>()
 );

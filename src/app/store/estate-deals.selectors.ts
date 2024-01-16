@@ -13,3 +13,12 @@ export const getEstateDealsData = createSelector(
     return state?.data as EstateDeal[];
   }
 );
+
+export const getEstateDealsFiteredData = createSelector(
+  selectEstateDealsState,
+  (state) => {
+    return state?.data?.filter((estateDeal) => {
+      return estateDeal.dealName.toLowerCase() === state.search.toLowerCase();
+    });
+  }
+);

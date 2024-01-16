@@ -1,11 +1,5 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import {
-  loadEstateDeals,
-  loadEstateDealsSuccess,
-  loadEstateDealsFailure,
-  updateEstateDeal,
-  updateEstateDealSuccess,
-} from './estate-deals.actions';
+import * as fromActions from './estate-deals.actions';
 import { EstateDeal } from '../shared/models/estate-deal.interface';
 
 export interface EstateDealState {
@@ -13,43 +7,51 @@ export interface EstateDealState {
   loaded: boolean;
   error: string;
   data: EstateDeal[] | null;
+  search: string;
 }
 export const initialState: EstateDealState = {
   loading: false,
   loaded: false,
   error: '',
   data: null,
+  search: '',
 };
 
 export const counterReducer = createReducer(
   initialState,
-  on(loadEstateDeals, (state) => ({
+  on(fromActions.loadEstateDeals, (state) => ({
     ...state,
     loading: true,
     loaded: false,
   })),
-  on(loadEstateDealsSuccess, (state, { data }) => ({
+  on(fromActions.loadEstateDealsSuccess, (state, { data }) => ({
     ...state,
     loading: false,
     loaded: true,
     data,
   })),
-  on(loadEstateDealsFailure, (state, { error }) => ({
+  on(fromActions.loadEstateDealsFailure, (state, { error }) => ({
     ...state,
     loading: false,
     loaded: false,
     error,
   })),
-  on(updateEstateDeal, (state) => ({
+  on(fromActions.updateEstateDeal, (state) => ({
     ...state,
     loading: true,
     loaded: false,
   })),
-  on(updateEstateDealSuccess, (state, { data }) => ({
+  on(fromActions.updateEstateDealSuccess, (state, { data }) => ({
     ...state,
     data: data,
     loading: false,
     loaded: true,
+  })),
+  on(fromActions.filterEstateDeals, (state, { search }) => ({
+    ...state,
+    loading: false,
+    loaded: true,
+    search: search,
   }))
 );
 

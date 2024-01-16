@@ -47,7 +47,7 @@ export class EstateDealFormComponent implements OnInit {
   });
   constructor(
     private formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<EstateDealFormComponent>,
+    public dialogRef: MatDialogRef<EstateDealFormComponent>,
     private store: Store,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}

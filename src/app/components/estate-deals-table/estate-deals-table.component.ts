@@ -27,9 +27,12 @@ export class EstateDealsTableComponent implements OnInit {
     this.displayedColumns = this.getDisplayedColumns();
   }
   getDisplayedColumns(): string[] {
-    return Object.keys(this.dataSource[0]).filter(
-      (key) => key !== 'image' && key !== 'address'
-    );
+    if (!!this.dataSource.length) {
+      return Object.keys(this.dataSource[0]).filter(
+        (key) => key !== 'image' && key !== 'address'
+      );
+    }
+    return [];
   }
 
   clickRow(otherRow: any) {

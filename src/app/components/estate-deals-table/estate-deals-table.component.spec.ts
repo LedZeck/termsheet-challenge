@@ -8,16 +8,16 @@ describe('EstateDealsTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EstateDealsTableComponent]
-    })
-    .compileComponents();
-    
+      imports: [EstateDealsTableComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(EstateDealsTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
+    component.dataSource = [];
     expect(component).toBeTruthy();
   });
 });

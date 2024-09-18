@@ -33,7 +33,7 @@ describe('EstateDealsSearchFormComponent', () => {
     expect(component.searchFormObject.emit).toHaveBeenCalled();
     expect(component.searchFormObject.emit).toHaveBeenCalledWith({
       search: 'test',
-      filters: null,
+      filters: [],
     });
   });
 });

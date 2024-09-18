@@ -4,6 +4,7 @@ import {
   FormControl,
   Validators,
   ReactiveFormsModule,
+  FormArray,
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -38,39 +39,78 @@ import { EstateDeal } from '../../shared/models/estate-deal.interface';
   styleUrl: './estate-deal-form.component.scss',
 })
 export class EstateDealFormComponent implements OnInit {
+  data: EstateDeal[] = [];
   estateDealForm = this.formBuilder.group({
-    dealName: new FormControl<string | null>(null, Validators.required),
-    dealType: new FormControl<EstateDealType | null>(null),
-    price: new FormControl<number | null>(null, Validators.required),
-    noi: new FormControl<number | null>(null, Validators.required),
-    address: new FormControl<string | null>(null, Validators.required),
+    deals: this.formBuilder.array([]),
   });
   constructor(
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<EstateDealFormComponent>,
     private store: Store,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public injectedData: any
+  ) {
+    this.data = [injectedData] || [];
+  }
 
   ngOnInit(): void {
     if (this.data) {
-      this.estateDealForm.patchValue(this.data);
+      this.data.forEach((deal: EstateDeal) => {
+        this.addDealForm(deal);
+      });
+    } else {
+      this.addDealForm();
     }
+  }
+
+  get dealTypes() {
+    return Object.values(EstateDealType);
+  }
+
+  get deals() {
+    return this.estateDealForm.get('deals') as FormArray;
+  }
+
+  addDealForm(deal?: EstateDeal) {
+    if (this.estateDealForm.invalid) {
+      return;
+    }
+    const dealForm = this.formBuilder.group({
+      dealName: new FormControl(deal?.dealName || null, Validators.required),
+      dealType: new FormControl(deal?.dealType || null),
+      price: new FormControl(deal?.price || null, Validators.required),
+      noi: new FormControl(deal?.noi || null, Validators.required),
+      address: new FormControl(deal?.address || null, Validators.required),
+    });
+    this.deals.push(dealForm);
+  }
+
+  removeDealForm(index: number) {
+    this.deals.removeAt(index);
   }
 
   onSubmit() {
     if (this.estateDealForm.valid) {
-      const payload: EstateDeal = {
-        id: this.data?.id,
-        capRate: this.data?.capRate,
-        dealName: this.estateDealForm.value.dealName || this.data.dealName,
-        dealType: this.estateDealForm.value.dealType || this.data.dealType,
-        price: this.estateDealForm.value.price || this.data.price,
-        noi: this.estateDealForm.value.noi || this.data.noi,
-        address: this.estateDealForm.value.address || this.data.address,
-        image: this.data?.image,
-      };
-      this.store.dispatch(fromActions.updateEstateDeal({ data: payload }));
+      const [dealToEdit] = this.data;
+      const randomId = Math.floor(Math.random() * 1000);
+      const randomCapRate = Math.floor(Math.random() * 100);
+      const payload: EstateDeal[] = this.deals.value.map(
+        (deal: EstateDeal, index: number) => ({
+          id: this.data?.[index]?.id || randomId,
+          capRate: this.data?.[index]?.capRate || randomCapRate,
+          dealName: deal.dealName || this.data?.[index]?.dealName,
+          dealType: deal.dealType || this.data?.[index]?.dealType,
+          price: deal.price || this.data?.[index]?.price,
+          noi: deal.noi || this.data?.[index]?.noi,
+          address: deal.address || this.data?.[index]?.address,
+          image: this.data?.[index]?.image,
+        })
+      );
+      if (dealToEdit) {
+        const [firstDeal] = payload;
+        this.store.dispatch(fromActions.updateEstateDeal({ data: firstDeal }));
+      } else {
+        this.store.dispatch(fromActions.addEstateDeals({ data: payload }));
+      }
       this.dialogRef.close(this.estateDealForm.value);
     }
   }

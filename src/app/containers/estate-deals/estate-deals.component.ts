@@ -24,7 +24,7 @@ import { Subscription } from 'rxjs';
 })
 export class EstateDealsComponent implements OnInit, OnDestroy {
   public estateDeals$ = this.store.pipe(
-    select((state: State) => fromSelectors.getEstateDealsData(state))
+    select(fromSelectors.getFilteredEstateDealsData)
   );
   filteredEstateDeals: EstateDeal[] = [];
   estateDeals: EstateDeal[] = [];
@@ -41,19 +41,21 @@ export class EstateDealsComponent implements OnInit, OnDestroy {
   }
   search(event: any) {
     this.store.dispatch(
-      fromActions.filterEstateDeals({ search: event.search as any })
+      fromActions.filterEstateDeals({
+        search: event.search as any,
+        filters: event.filters as any,
+      })
     );
     this.subscriptions$.add(
       this.store
         .pipe(
           select((state: State) =>
-            fromSelectors.getEstateDealsFiteredData(state)
+            fromSelectors.getFilteredEstateDealsData(state)
           )
         )
         .subscribe((data) => {
           if (data) {
             this.estateDeals = data;
-            console.log(this.estateDeals);
           }
         })
     );

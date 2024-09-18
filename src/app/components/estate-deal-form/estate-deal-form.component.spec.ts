@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { EstateDealType } from '../../shared/models/estate-deal-type.enum';
+import { AbstractControl, FormGroup } from '@angular/forms';
 
 describe('EstateDealFormComponent', () => {
   let component: EstateDealFormComponent;
@@ -36,25 +37,53 @@ describe('EstateDealFormComponent', () => {
     expect(component).toBeTruthy();
   });
   it('should have a form with 5 controls', () => {
-    expect(Object.keys(component.estateDealForm.controls).length).toEqual(5);
+    component.addDealForm();
+    expect(
+      Object.keys((component.deals.at(0) as FormGroup).controls)
+    ).toHaveLength(5);
+  });
+  it('should add a deal form', () => {
+    component.addDealForm();
+    expect(component.deals.length).toBe(1);
+    component.estateDealForm.patchValue({
+      deals: [
+        {
+          dealName: 'test',
+          dealType: EstateDealType.AQUISITION,
+          price: 1,
+          noi: 1,
+          address: 'test',
+        },
+      ],
+    });
+    component.addDealForm();
+    expect(component.deals.length).toBe(2);
+  });
+  it('should remove a deal form', () => {
+    component.addDealForm();
+    expect(component.deals.length).toBe(1);
+    component.removeDealForm(0);
+    expect(component.deals.length).toBe(0);
   });
   it('should make the dealName control required', () => {
-    let control = component.estateDealForm.get('dealName');
+    let control: AbstractControl | null =
+      component.estateDealForm.get('dealName');
     control?.setValue('');
     expect(control?.valid).toBeFalsy();
   });
   it('should make the price control required', () => {
-    let control = component.estateDealForm.get('price');
+    let control: AbstractControl | null = component.estateDealForm.get('price');
     control?.setValue(null);
     expect(control?.valid).toBeFalsy();
   });
   it('should make the noi control required', () => {
-    let control = component.estateDealForm.get('noi');
+    let control: AbstractControl | null = component.estateDealForm.get('noi');
     control?.setValue(null);
     expect(control?.valid).toBeFalsy();
   });
   it('should make the address control required', () => {
-    let control = component.estateDealForm.get('address');
+    let control: AbstractControl | null =
+      component.estateDealForm.get('address');
     control?.setValue('');
     expect(control?.valid).toBeFalsy();
   });
@@ -64,11 +93,15 @@ describe('EstateDealFormComponent', () => {
     const dialogRef = TestBed.inject(MatDialogRef);
     jest.spyOn(dialogRef, 'close').mockImplementation(() => {});
     component.estateDealForm.patchValue({
-      dealName: 'test',
-      dealType: EstateDealType.AQUISITION,
-      price: 1,
-      noi: 1,
-      address: 'test',
+      deals: [
+        {
+          dealName: 'test',
+          dealType: EstateDealType.AQUISITION,
+          price: 1,
+          noi: 1,
+          address: 'test',
+        },
+      ],
     });
     component.onSubmit();
     expect(store.dispatch).toHaveBeenCalled();

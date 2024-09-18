@@ -1,7 +1,7 @@
 <div class="estate-deal-form">
   <h1 class="title">Add Estate Deal</h1>
   <form [formGroup]="estateDealForm">
-    <div class="form-row">
+    <!-- <div class="form-row">
       <mat-form-field appearance="outline">
         <mat-label>Deal Name</mat-label>
         <input formControlName="dealName" matInput />
@@ -24,8 +24,48 @@
     <div class="form-row">
       <mat-form-field appearance="outline">
         <mat-label>Type</mat-label>
-        <input formControlName="dealType" matInput />
+        <mat-select formControlName="dealType">
+          @for (dealType of dealTypes; track dealType) {
+          <mat-option [value]="dealType">{{ dealType }}</mat-option>
+          }
+        </mat-select>
       </mat-form-field>
+    </div> -->
+    <div formArrayName="deals">
+      @for (deal of deals.controls; track deal; let index = $index) {
+      <div [formGroupName]="index">
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Deal Name</mat-label>
+            <input formControlName="dealName" matInput />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Address</mat-label>
+            <input formControlName="address" matInput />
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Price</mat-label>
+            <input formControlName="price" matInput />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>NOI</mat-label>
+            <input formControlName="noi" matInput />
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Type</mat-label>
+            <mat-select formControlName="dealType">
+              @for (dealType of dealTypes; track dealType) {
+              <mat-option [value]="dealType">{{ dealType }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      }
     </div>
     <div class="form-row action-buttons">
       <button
@@ -37,6 +77,12 @@
         Submit
       </button>
       <button mat-flat-button color="warn" (click)="onCancel()">Cancel</button>
+
+      @if (!injectedData) {
+      <button mat-flat-button color="accent" (click)="addDealForm()">
+        Add New Deal
+      </button>
+      }
     </div>
   </form>
 </div>

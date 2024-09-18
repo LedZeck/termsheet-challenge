@@ -14,11 +14,7 @@ export const getEstateDealsData = createSelector(
   }
 );
 
-export const getEstateDealsFiteredData = createSelector(
+export const getFilteredEstateDealsData = createSelector(
   selectEstateDealsState,
-  (state) => {
-    return state?.data?.filter((estateDeal) => {
-      return estateDeal.dealName.toLowerCase() === state.search.toLowerCase();
-    });
-  }
+  (state) => state?.filteredData as EstateDeal[]
 );

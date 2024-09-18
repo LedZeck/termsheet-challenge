@@ -8,6 +8,7 @@ export interface EstateDealState {
   error: string;
   data: EstateDeal[] | null;
   search: string;
+  filteredData: EstateDeal[] | null;
 }
 export const initialState: EstateDealState = {
   loading: false,
@@ -15,6 +16,7 @@ export const initialState: EstateDealState = {
   error: '',
   data: null,
   search: '',
+  filteredData: null,
 };
 
 export const counterReducer = createReducer(
@@ -29,8 +31,27 @@ export const counterReducer = createReducer(
     loading: false,
     loaded: true,
     data,
+    filteredData: data,
   })),
   on(fromActions.loadEstateDealsFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error,
+  })),
+  on(fromActions.addEstateDeals, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+  })),
+  on(fromActions.addEstateDealsSuccess, (state, { data }) => ({
+    ...state,
+    data: data,
+    loading: false,
+    loaded: true,
+    filteredData: data,
+  })),
+  on(fromActions.addEstateDealsFailure, (state, { error }) => ({
     ...state,
     loading: false,
     loaded: false,
@@ -46,13 +67,25 @@ export const counterReducer = createReducer(
     data: data,
     loading: false,
     loaded: true,
+    filteredData: data,
   })),
-  on(fromActions.filterEstateDeals, (state, { search }) => ({
-    ...state,
-    loading: false,
-    loaded: true,
-    search: search,
-  }))
+  on(fromActions.filterEstateDeals, (state, { search, filters }) => {
+    const filteredData =
+      state.data?.filter((deal) => {
+        const matchesSearch = deal.dealName
+          .toLowerCase()
+          .includes(search.toLowerCase());
+        const matchesFilters =
+          filters.length === 0 || filters.includes(deal.dealType);
+        return matchesSearch && matchesFilters;
+      }) || [];
+
+    return {
+      ...state,
+      filteredData,
+      search,
+    };
+  })
 );
 
 export function reducer(state: EstateDealState | undefined, action: Action) {

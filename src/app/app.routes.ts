@@ -11,13 +11,6 @@ export const routes: Routes = [
   {
     path: 'deals',
     component: EstateDealsComponent,
-    // children: [
-    //   {
-    //     path: 'details/:id',
-    //     component: EstateDealDetailsComponent,
-    //     pathMatch: 'full',
-    //   },
-    // ],
   },
   {
     path: 'deal-details/:id',

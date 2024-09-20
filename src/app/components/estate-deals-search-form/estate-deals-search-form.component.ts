@@ -36,8 +36,8 @@ export class EstateDealsSearchFormComponent implements OnDestroy {
   private subscriptions$ = new Subscription();
 
   searchForm = this.formBuilder.group({
-    search: [''],
-    filters: new FormControl<EstateDealType[] | null>(null),
+    search: new FormControl<string>(''),
+    filters: new FormControl<EstateDealType[]>([]),
   });
   availableFilters: EstateDealTypeFilter[] = [
     {
@@ -64,19 +64,16 @@ export class EstateDealsSearchFormComponent implements OnDestroy {
   }
 
   public onFilterChange(estateDealType: EstateDealType): void {
-    this.availableFilters = this.availableFilters.map((filter) => ({
-      ...filter,
-      selected:
-        filter.type === estateDealType ? !filter.selected : filter.selected,
-    }));
+    const filter = this.availableFilters.find((f) => f.type === estateDealType);
+    if (filter) {
+      filter.selected = !filter.selected;
+    }
 
     const selectedFilters = this.availableFilters
       .filter((filter) => filter.selected)
       .map((filter) => filter.type);
 
-    this.searchForm.patchValue({
-      filters: selectedFilters,
-    });
+    this.searchForm.patchValue({ filters: selectedFilters });
   }
 
   submitSearchForm(): void {

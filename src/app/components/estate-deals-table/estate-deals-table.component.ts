@@ -17,22 +17,34 @@ import { CommonModule } from '@angular/common';
   templateUrl: './estate-deals-table.component.html',
   styleUrl: './estate-deals-table.component.scss',
 })
-export class EstateDealsTableComponent implements OnInit {
+export class EstateDealsTableComponent implements OnInit, OnChanges {
   @Input() estateDeals!: EstateDeal[] | null;
   displayedColumns?: string[];
   dataSource!: EstateDeal[];
   constructor(private router: Router) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!!changes['estateDeals'].previousValue) {
+      this.dataSource = changes['estateDeals'].currentValue;
+      this.displayedColumns = this.getDisplayedColumns();
+    }
+  }
+
   ngOnInit(): void {
     this.dataSource = this.estateDeals || [];
     this.displayedColumns = this.getDisplayedColumns();
   }
+
   getDisplayedColumns(): string[] {
-    return Object.keys(this.dataSource[0]).filter(
-      (key) => key !== 'image' && key !== 'address'
-    );
+    if (!!this.dataSource.length) {
+      return Object.keys(this.dataSource[0]).filter(
+        (key) => key !== 'image' && key !== 'address'
+      );
+    }
+    return [];
   }
 
-  clickRow(otherRow: any) {
-    this.router.navigate(['/deal-details', otherRow.id]);
+  clickRow(row: any) {
+    this.router.navigate(['/deal-details', row.id]);
   }
 }

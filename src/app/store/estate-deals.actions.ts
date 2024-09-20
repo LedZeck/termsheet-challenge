@@ -1,10 +1,15 @@
 import { createAction, props } from '@ngrx/store';
 import { EstateDeal } from '../shared/models/estate-deal.interface';
+import { EstateDealType } from '../shared/models/estate-deal-type.enum';
 
 export enum EstateDealActionTypes {
   LoadEstateDeals = '[EstateDeal] Load EstateDeals',
   LoadEstateDealsSuccess = '[EstateDeal] Load EstateDeals Success',
   LoadEstateDealsFailure = '[EstateDeal] Load EstateDeals Failure',
+
+  addEstateDeals = '[EstateDeal] Add EstateDeals',
+  addEstateDealsSuccess = '[EstateDeal] Add EstateDeals Success',
+  addEstateDealsFailure = '[EstateDeal] Add EstateDeals Failure',
 
   UpdateEstateDeal = '[EstateDeal] Update EstateDeal',
   UpdateEstateDealSuccess = '[EstateDeal] Update EstateDeal Success',
@@ -27,6 +32,21 @@ export const loadEstateDealsFailure = createAction(
   props<{ error: any }>()
 );
 
+export const addEstateDeals = createAction(
+  EstateDealActionTypes.addEstateDeals,
+  props<{ data: EstateDeal[] }>()
+);
+
+export const addEstateDealsSuccess = createAction(
+  EstateDealActionTypes.addEstateDealsSuccess,
+  props<{ data: EstateDeal[] }>()
+);
+
+export const addEstateDealsFailure = createAction(
+  EstateDealActionTypes.addEstateDealsFailure,
+  props<{ error: any }>()
+);
+
 export const updateEstateDeal = createAction(
   EstateDealActionTypes.UpdateEstateDeal,
   props<{ data: EstateDeal }>()
@@ -44,5 +64,5 @@ export const updateEstateDealFailure = createAction(
 
 export const filterEstateDeals = createAction(
   EstateDealActionTypes.FilterEstateDeals,
-  props<{ search: string }>()
+  props<{ search: string; filters: EstateDealType[] }>()
 );

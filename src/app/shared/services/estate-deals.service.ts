@@ -17,11 +17,14 @@ export class EstateDealsService {
   searchEstateDeals(
     searchTerm: EstateDealTypeFilter
   ): Observable<EstateDeal[]> {
-    console.log('searchTerm', searchTerm);
     return of(
       estateDealsMock.filter((estateDeal) => {
         return estateDeal.dealType === searchTerm.type;
       })
     );
+  }
+
+  addEstateDeals(estateDealsList: EstateDeal[]): Observable<EstateDeal[]> {
+    return of(estateDealsList);
   }
 }

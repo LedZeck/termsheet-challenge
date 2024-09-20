@@ -44,6 +44,23 @@ export class EstateDealsEffects {
     );
   });
 
+  addEstateDeals$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(fromActions.addEstateDeals),
+      withLatestFrom(this.store.pipe(select(fromSelectors.getEstateDealsData))),
+      switchMap(([action, estateDealsData]) => {
+        const updateEstateDealList = [...estateDealsData, ...action.data];
+        return this.estateDealsService
+          .addEstateDeals(action.data)
+          .pipe(
+            map((data) =>
+              fromActions.addEstateDealsSuccess({ data: updateEstateDealList })
+            )
+          );
+      })
+    );
+  });
+
   constructor(
     private actions$: Actions,
     private estateDealsService: EstateDealsService,

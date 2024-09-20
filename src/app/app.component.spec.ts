@@ -1,10 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { provideMockStore } from '@ngrx/store/testing';
 
 describe('AppComponent', () => {
+  const initialState = { estateDeals: '' };
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
+      providers: [provideMockStore({ initialState })],
     }).compileComponents();
   });
 
@@ -23,7 +26,7 @@ describe('AppComponent', () => {
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, termsheet-challenge');
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('span').textContent).toContain('TermSheet');
   });
 });

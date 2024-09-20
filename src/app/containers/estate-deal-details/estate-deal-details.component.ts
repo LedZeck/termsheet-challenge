@@ -34,14 +34,19 @@ export class EstateDealDetailsComponent implements OnInit {
   }
 
   private getDealId() {
-    this.estateDealId = Number(this.route.snapshot.paramMap.get('id'));
+    if (this.route.snapshot.paramMap?.get('id')) {
+      this.estateDealId = Number(this.route.snapshot.paramMap.get('id'));
+    }
   }
 
   private getDealDetails() {
-    this.estateDealDetails$.subscribe((data) => {
-      this.estateDealDetails =
-        data?.find((deal: EstateDeal) => deal.id === this.estateDealId) || null;
-    });
+    if (this.estateDealId) {
+      this.estateDealDetails$.subscribe((data) => {
+        this.estateDealDetails =
+          data?.find((deal: EstateDeal) => deal.id === this.estateDealId) ||
+          null;
+      });
+    }
   }
   goBack() {
     window.history.back();

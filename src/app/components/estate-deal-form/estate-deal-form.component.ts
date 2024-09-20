@@ -93,6 +93,7 @@ export class EstateDealFormComponent implements OnInit {
       const [dealToEdit] = this.data;
       const randomId = Math.floor(Math.random() * 1000);
       const randomCapRate = Math.floor(Math.random() * 100);
+      const imgMock = 'https://picsum.photos/100';
       const payload: EstateDeal[] = this.deals.value.map(
         (deal: EstateDeal, index: number) => ({
           id: this.data?.[index]?.id || randomId,
@@ -102,7 +103,7 @@ export class EstateDealFormComponent implements OnInit {
           price: deal.price || this.data?.[index]?.price,
           noi: deal.noi || this.data?.[index]?.noi,
           address: deal.address || this.data?.[index]?.address,
-          image: this.data?.[index]?.image,
+          image: this.data?.[index]?.image || imgMock,
         })
       );
       if (dealToEdit) {

@@ -79,7 +79,12 @@
       <button mat-flat-button color="warn" (click)="onCancel()">Cancel</button>
 
       @if (!injectedData) {
-      <button mat-flat-button color="accent" (click)="addDealForm()">
+      <button
+        [disabled]="estateDealForm.invalid"
+        mat-flat-button
+        color="accent"
+        (click)="addDealForm()"
+      >
         Add New Deal
       </button>
       }
